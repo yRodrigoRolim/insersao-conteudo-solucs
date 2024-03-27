@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Esteiras</title>
+</head>
+<body>
+    <aside>
+        <div>
+            <h1>ESTEIRAS</h1>
+            <p>breadcrumb and schemas</p>
+            <div class="orange-line"></div>
+            <nav>
+                <ul>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="all-schema.php">Schemas</a></li>
+                    <li><a href="breadcrumb-unico-pag.php">Breadcrumb barra lista</a></li>
+                    <div class="orange-line" style="margin: 0;"></div>
+                    <p>Extra</p>
+                    <li><a href="listar-categoria-pag.php">Listar Categorias</a></li>
+                    <li><a href="criar-breadcrumb-pag.php">Breadcrumb por lista</a></li>
+                    <li><a href="insercao-conteudo-pag.php">Inserção conteúdo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside> 
+
+    <main>
+        <div style="width: 900px; max-width: none;">
+            <div>
+                <h1>Esterias</h1>
+                <p>Inserção de conteúdo</p>
+                <div class="orange-line" style="max-width: 40%; margin: 10px 0px;"></div>
+                <h3>Inserção de conteúdo</h3>    
+            </div>
+            <div>
+                <form method="post">
+                    <label for="texto_da_textarea">Cole o seu texto e identifique as listas com !list</label>
+                    <input type="text" name="strong" placeholder="h1 to strong">
+                    <div style="display: flex; margin-top: 20px;">
+                        <textarea id="texto_da_textarea" name="texto_da_textarea" rows="12" required style="width: 100%; margin-right: 20px;"></textarea>
+                    </div>
+                    <div class="button-container">
+                        <button type="button" onclick="criartexto()">Criar o conteúdo</button>
+                        <button id="botaoCopiar">Clipboard</button>
+                    </div>
+                </form>
+            </div>
+            <div class="margin-top erros-retornos" id="conteudoParaCopiar"></div>
+        </div>
+    </main>
+
+    <script>
+        function criartexto() {
+            const texto = document.getElementById('texto_da_textarea').value;
+            const linhas = texto.split("\n");
+            let html = '<div class="article-content">';
+            let emLista = false;
+            let paragrafoAdicionado = false;
+
+            linhas.forEach(linha => {
+                linha = linha.trim();
+                if (linha === '!list') {
+                    if (emLista) {
+                        html += '</ul>';
+                        emLista = false;
+                    } else {
+                        html += '<ul>';
+                        emLista = true;
+                    }
+                } else if (emLista) {
+                    if (linha.length > 1) {
+                        html += '<li>' + linha + '</li>';
+                    }
+                } else {
+                    if (linha.length < 70 && linha.length > 2) {
+                        html += '<h2>' + linha + '</h2>';
+                    } else if (linha.length > 70) {
+                        const h1strong = document.getElementsByName('strong')[0].value;
+                        const linhaSubstituida = linha.replace(h1strong, "<strong>" + h1strong + "</strong>");
+                        const linhaFinal = linhaSubstituida;
+
+                        html += '<p>' + linhaFinal + '</p>';
+
+                        if (!paragrafoAdicionado) {
+                            html += '<details class="webktbox"><summary onclick="toggleDetails()"></summary>';
+                                paragrafoAdicionado = true;
+                        }
+                    }
+                }
+            });
+
+
+    if (emLista) {
+        html += '</ul>';
+    }
+    if (paragrafoAdicionado) {
+        html += '</details>';
+    }
+    html += '</div>';
+
+    // Adiciona o HTML gerado à div para exibição
+    const contentDiv = document.getElementById('conteudoParaCopiar');
+    contentDiv.textContent = html
+   
+};
+    </script>
+
+<script>
+    document.getElementById('botaoCopiar').addEventListener('click', function() {
+// Encontra o elemento que contém o conteúdo a ser copiado
+var conteudo = document.getElementById('conteudoParaCopiar').innerText;
+
+// Cria uma área de texto temporária e a utiliza para selecionar o conteúdo
+var areaTexto = document.createElement('textarea');
+areaTexto.value = conteudo;
+document.body.appendChild(areaTexto);
+areaTexto.select();
+document.execCommand('Copy'); // Executa o comando de cópia
+
+// Remove a área de texto temporária do documento
+document.body.removeChild(areaTexto);
+
+// (Opcional) Exibe uma mensagem ou executa uma ação após a cópia
+alert('Conteúdo copiado para o clipboard!');
+});
+
+</script>
+</body>
+</html>
