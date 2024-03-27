@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --color-primary: #FF5319;
+    --color-secundary: #3D315B;
+    --color-green: #A2D729;
+    --color-red: #BB0A21;
+}
+
+*{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    background-color: #E0D8DE;
+}
+aside{
+    position: fixed;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    background-color: white;
+    height: 100vh;
+}
+aside div{
+    margin: 20px auto;
+    width: 70%;
+}
+aside h1{
+    color: var(--color-primary);
+    font-size: 2.5rem;
+}
+.orange-line{
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
+}
+aside p{
+    font-size: 1.2rem;
+}
+aside ul{
+    list-style: none;
+}
+aside ul li{
+    cursor: pointer;
+    margin-top: 15px;
+    padding-left: 10px;
+    border-left: 2.5px solid var(--color-primary);
+    transition: 0.5s;
+}
+aside ul li:hover{
+    transition: 0.5s;
+    border-left: 2.5px solid var(--color-secundary);
+    font-size: 1.1rem;
+}
+main{
+    margin-left: 330px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+}
+main > div{
+    margin: 20px 0px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 20px;
+    padding: 30px;
+    background-color: #fff;
+    width: 500px;
+    max-width: 500px;
+    min-height: 500px;
+}
+main > div div h1{
+    color: var(--color-primary);
+}
+main > div div p{
+    max-width: 40%;
+    color: var(--color-secundary);
+}
+main > div div h3{
+    color: var(--color-secundary);
+    font-weight: 700;
+}
+.poupup{
+    position: relative;
+    top: 0;
+    margin-right: 0;
+}
+.margin-top{
+    margin-top: 20px;
+}
+.erros-retornos{
+    font-size: 14px;
+}
+main ul{
+    list-style: none;
+}
+aside ul li a{
+    outline: none;
+    text-decoration: none;
+}
+.erros-retornos li{
+    margin-top: 5px;
+    border-left: 2px solid var(--color-secundary);
+    padding: 5px;
+}
+.erros-retornos .green{
+    border-left: 2px solid var(--color-green);
+}
+.erros-retornos .red{
+    border-left: 2px solid var(--color-red);
+}
+main div button,main div input[type="submit"]{
+    margin-top: 10px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    width: 180px;
+    margin-right: 15px;
+    border-radius: 7px;
+    padding: 5px 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 15px;
+    background-color: var(--color-primary);
+    transition: 0.5s;
+}
+aside li a{
+    color: var(--color-secundary);
+}
+main div button:hover,main div input[type="submit"]:hover{
+    background-color: #FFF;
+    transition: 0.5s;
+    color: var(--color-primary);
+}
+
+input:checked ~ .checkmark {
+    background-color: #26F3;
+  }
+.button-container input{
+    margin-top: 20px;
+    padding: 5px;
+    outline: none;
+}
+textarea{
+    padding: 5px;
+    outline: none;
+}
