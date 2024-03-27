@@ -80,10 +80,7 @@
 
                         html += '<p>' + linhaFinal + '</p>';
 
-                        if (!paragrafoAdicionado) {
-                            html += '<details class="webktbox"><summary onclick="toggleDetails()"></summary>';
-                                paragrafoAdicionado = true;
-                        }
+                     
                     }
                 }
             });
@@ -92,10 +89,8 @@
     if (emLista) {
         html += '</ul>';
     }
-    if (paragrafoAdicionado) {
-        html += '</details>';
-    }
-    html += '</div>';
+ 
+  
 
     // Adiciona o HTML gerado à div para exibição
     const contentDiv = document.getElementById('conteudoParaCopiar');
