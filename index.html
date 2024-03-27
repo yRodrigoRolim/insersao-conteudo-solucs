@@ -9,19 +9,12 @@
 <body>
     <aside>
         <div>
-            <h1>ESTEIRAS</h1>
+            <h1>Inserção de contéudo</h1>
             <p>breadcrumb and schemas</p>
             <div class="orange-line"></div>
             <nav>
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="all-schema.php">Schemas</a></li>
-                    <li><a href="breadcrumb-unico-pag.php">Breadcrumb barra lista</a></li>
-                    <div class="orange-line" style="margin: 0;"></div>
-                    <p>Extra</p>
-                    <li><a href="listar-categoria-pag.php">Listar Categorias</a></li>
-                    <li><a href="criar-breadcrumb-pag.php">Breadcrumb por lista</a></li>
-                    <li><a href="insercao-conteudo-pag.php">Inserção conteúdo</a></li>
                 </ul>
             </nav>
         </div>
@@ -38,7 +31,7 @@
             <div>
                 <form method="post">
                     <label for="texto_da_textarea">Cole o seu texto e identifique as listas com !list</label>
-                    <input type="text" name="strong" placeholder="h1 to strong">
+                    
                     <div style="display: flex; margin-top: 20px;">
                         <textarea id="texto_da_textarea" name="texto_da_textarea" rows="12" required style="width: 100%; margin-right: 20px;"></textarea>
                     </div>
@@ -56,7 +49,7 @@
         function criartexto() {
             const texto = document.getElementById('texto_da_textarea').value;
             const linhas = texto.split("\n");
-            let html = '<div class="article-content">';
+            let html = '';
             let emLista = false;
             let paragrafoAdicionado = false;
 
@@ -78,16 +71,10 @@
                     if (linha.length < 70 && linha.length > 2) {
                         html += '<h2>' + linha + '</h2>';
                     } else if (linha.length > 70) {
-                        const h1strong = document.getElementsByName('strong')[0].value;
-                        const linhaSubstituida = linha.replace(h1strong, "<strong>" + h1strong + "</strong>");
-                        const linhaFinal = linhaSubstituida;
 
-                        html += '<p>' + linhaFinal + '</p>';
+                        html += '<p>' + linha + '</p>';
 
-                        if (!paragrafoAdicionado) {
-                            html += '<details class="webktbox"><summary onclick="toggleDetails()"></summary>';
-                                paragrafoAdicionado = true;
-                        }
+                       
                     }
                 }
             });
@@ -96,10 +83,7 @@
     if (emLista) {
         html += '</ul>';
     }
-    if (paragrafoAdicionado) {
-        html += '</details>';
-    }
-    html += '</div>';
+    
 
     // Adiciona o HTML gerado à div para exibição
     const contentDiv = document.getElementById('conteudoParaCopiar');
