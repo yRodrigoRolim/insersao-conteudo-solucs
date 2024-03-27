@@ -24,14 +24,14 @@
         <div style="width: 900px; max-width: none;">
             <div>
                 <h1>Inserção de conteúdo</h1>
-                <p>Inserção de conteúdo</p>
+                <p>Faça a sua Inserção de contéudo</p>
                 <div class="orange-line" style="max-width: 40%; margin: 10px 0px;"></div>
                 <h3>Inserção de conteúdo</h3>    
             </div>
             <div>
                 <form method="post">
                     <label for="texto_da_textarea">Cole o seu texto e identifique as listas com !list</label>
-                    
+                    <input type="text" name="strong" id="strong">
                     <div style="display: flex; margin-top: 20px;">
                         <textarea id="texto_da_textarea" name="texto_da_textarea" rows="12" required style="width: 100%; margin-right: 20px;"></textarea>
                     </div>
@@ -71,10 +71,16 @@
                     if (linha.length < 70 && linha.length > 2) {
                         html += '<h2>' + linha + '</h2>';
                     } else if (linha.length > 70) {
+                        const h1strong = document.getElementsByName('strong')[0].value;
+                        const linhaSubstituida = linha.replace(h1strong, "<strong>" + h1strong + "</strong>");
+                        const linhaFinal = linhaSubstituida;
 
-                        html += '<p>' + linha + '</p>';
+                        html += '<p>' + linhaFinal + '</p>';
 
-                       
+                        if (!paragrafoAdicionado) {
+                            html += '<details class="webktbox"><summary onclick="toggleDetails()"></summary>';
+                                paragrafoAdicionado = true;
+                        }
                     }
                 }
             });
@@ -83,7 +89,10 @@
     if (emLista) {
         html += '</ul>';
     }
-    
+    if (paragrafoAdicionado) {
+        html += '</details>';
+    }
+    html += '</div>';
 
     // Adiciona o HTML gerado à div para exibição
     const contentDiv = document.getElementById('conteudoParaCopiar');
