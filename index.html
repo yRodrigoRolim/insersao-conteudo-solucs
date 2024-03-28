@@ -31,10 +31,9 @@
             <div>
                 <form>
                     <label for="texto_da_textarea">Cole o seu texto e identifique as listas com !list</label><br>
-                    
                     <div class="orange-line" style="max-width: 60%; margin: 10px 0px;"></div>
-                    <input type="text" name="strong" id="strong" placeholder="Negrito">
-                    <label for="strong">Coloque a palavra para deixar em negrito!</label>
+                    <input type="text" name="strong" id="strong" placeholder="Palavras para negrito, separadas por vírgula">
+                    <label for="strong">Coloque as palavras para deixar em negrito, separadas por vírgula!</label>
                     <div style="display: flex; margin-top: 20px;">
                         <textarea id="texto_da_textarea" name="texto_da_textarea" rows="12" required style="width: 100%; margin-right: 20px;"></textarea>
                     </div>
@@ -54,8 +53,8 @@
             const linhas = texto.split("\n");
             let html = '';
             let emLista = false;
-            let paragrafoAdicionado = false;
-
+            const palavrasNegrito = document.getElementById('strong').value.split(',').map(palavra => palavra.trim());
+            
             linhas.forEach(linha => {
                 linha = linha.trim();
                 if (linha === '!list') {
@@ -74,50 +73,34 @@
                     if (linha.length < 70 && linha.length > 2) {
                         html += '<h2>' + linha + '</h2>';
                     } else if (linha.length > 70) {
-                        const h1strong = document.getElementsByName('strong')[0].value;
-                        const linhaSubstituida = linha.replace(h1strong, "<strong>" + h1strong + "</strong>");
-                        const linhaFinal = linhaSubstituida;
-
-                        html += '<p>' + linhaFinal + '</p>';
-
-                     
+                        let linhaModificada = linha;
+                        palavrasNegrito.forEach(palavra => {
+                            linhaModificada = linhaModificada.replace(new RegExp(palavra, 'g'), `<strong>${palavra}</strong>`);
+                        });
+                        html += '<p>' + linhaModificada + '</p>';
                     }
                 }
             });
 
-
-    if (emLista) {
-        html += '</ul>';
-    }
- 
-  
-
-    // Adiciona o HTML gerado à div para exibição
-    const contentDiv = document.getElementById('conteudoParaCopiar');
-    contentDiv.textContent = html
-   
-};
+            if (emLista) {
+                html += '</ul>';
+            }
+            const contentDiv = document.getElementById('conteudoParaCopiar');
+            contentDiv.textContent = html; // Alterado para innerHTML para renderizar o HTML
+        }
     </script>
 
-<script>
-    document.getElementById('botaoCopiar').addEventListener('click', function() {
-// Encontra o elemento que contém o conteúdo a ser copiado
-var conteudo = document.getElementById('conteudoParaCopiar').innerText;
-
-// Cria uma área de texto temporária e a utiliza para selecionar o conteúdo
-var areaTexto = document.createElement('textarea');
-areaTexto.value = conteudo;
-document.body.appendChild(areaTexto);
-areaTexto.select();
-document.execCommand('Copy'); // Executa o comando de cópia
-
-// Remove a área de texto temporária do documento
-document.body.removeChild(areaTexto);
-
-// (Opcional) Exibe uma mensagem ou executa uma ação após a cópia
-alert('Conteúdo copiado para o clipboard!');
-});
-
-</script>
+    <script>
+        document.getElementById('botaoCopiar').addEventListener('click', function() {
+            var conteudo = document.getElementById('conteudoParaCopiar').innerText;
+            var areaTexto = document.createElement('textarea');
+            areaTexto.value = conteudo;
+            document.body.appendChild(areaTexto);
+            areaTexto.select();
+            document.execCommand('Copy');
+            document.body.removeChild(areaTexto);
+            alert('Conteúdo copiado para o clipboard!');
+        });
+    </script>
 </body>
 </html>
