@@ -114,12 +114,35 @@
 
     <script>
         // Seleciona o input color
+// const colorPicker = document.getElementById('colorPicker');
+
+// // Adiciona um ouvinte de eventos para quando o valor do input muda
+// colorPicker.addEventListener('input', function() {
+//     // Atualiza a variável CSS --color-primary com o valor selecionado
+//     document.documentElement.style.setProperty('--color-primary', colorPicker.value);
+// });
+
+        
 const colorPicker = document.getElementById('colorPicker');
+
+// Função para atualizar a cor
+function updateColor(color) {
+    document.documentElement.style.setProperty('--color-primary', color);
+    localStorage.setItem('selectedColor', color); // Salva a cor no localStorage
+}
 
 // Adiciona um ouvinte de eventos para quando o valor do input muda
 colorPicker.addEventListener('input', function() {
-    // Atualiza a variável CSS --color-primary com o valor selecionado
-    document.documentElement.style.setProperty('--color-primary', colorPicker.value);
+    updateColor(colorPicker.value);
+});
+
+// Verifica se já existe uma cor salva no localStorage ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    const savedColor = localStorage.getItem('selectedColor');
+    if (savedColor) {
+        colorPicker.value = savedColor; // Define o valor do input para a cor salva
+        updateColor(savedColor); // Atualiza a cor da página com a cor salva
+    }
 });
 
     </script>
