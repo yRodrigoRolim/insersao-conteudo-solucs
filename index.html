@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Esteiras</title>
+    <style>
+        :root{
+    --color-primary: #FF5319;
+    --color-secundary: #3D315B;
+    --color-green: #A2D729;
+    --color-red: #BB0A21;
+}
+    </style>
 </head>
 <body>
     <aside>
@@ -15,6 +23,7 @@
             <nav>
                 <ul>
                     <li><a href="index.php">Home</a></li>
+                    <li><input type="color" id="colorPicker"></li>
                 </ul>
             </nav>
         </div>
@@ -101,6 +110,18 @@
             document.body.removeChild(areaTexto);
             alert('Conteúdo copiado para o clipboard!');
         });
+    </script>
+
+    <script>
+        // Seleciona o input color
+const colorPicker = document.getElementById('colorPicker');
+
+// Adiciona um ouvinte de eventos para quando o valor do input muda
+colorPicker.addEventListener('input', function() {
+    // Atualiza a variável CSS --color-primary com o valor selecionado
+    document.documentElement.style.setProperty('--color-primary', colorPicker.value);
+});
+
     </script>
 </body>
 </html>
