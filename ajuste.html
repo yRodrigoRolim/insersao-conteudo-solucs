@@ -63,10 +63,11 @@
     var allowedTags = ['h1', 'p', 'h2', 'h3', 'ul', 'li','b','strong','ol'];
 
     // Remove todas as tags exceto as permitidas
-    var cleanedText = cleanetText.replace(/<span\s+([^>]+)>/gi, '');
+    
     var cleanedText = inputText.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, function(tag, tagName) {
         return allowedTags.includes(tagName.toLowerCase()) ? tag : '';
     });
+    var cleanedText = cleanetText.replace(/<span\s+([^>]+)>/gi, '');
     var cleanedText = cleanedText.replace(/<\/?\s*br\s*\/?>/gi, '');
     // Exibe o resultado
     document.getElementById('conteudoParaCopiar').textContent = cleanedText;
