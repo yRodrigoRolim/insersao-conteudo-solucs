@@ -33,8 +33,8 @@
     <main>
         <div style="width: 900px; max-width: none;">
             <div>
-                <h1>Inserção de conteúdo</h1>
-                <p>Faça a sua Inserção de contéudo</p>
+                <h1>Ajustes conteúdo</h1>
+                <p>Faça o seu ajuste de contéudo</p>
                 <div class="orange-line" style="max-width: 40%; margin: 10px 0px;"></div>
                 <h3>Inserção de conteúdo</h3>    
             </div>
@@ -60,7 +60,7 @@
     <script>
         function cleanHTML() {
     var inputText = document.getElementById('texto_da_textarea').value;
-    var allowedTags = ['h1', 'h2', 'h3', 'ul', 'li','b','strong'];
+    var allowedTags = ['h1', 'p', 'h2', 'h3', 'ul', 'li','b','strong'];
 
     // Remove todas as tags exceto as permitidas
     var cleanedText = inputText.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, function(tag, tagName) {
