@@ -60,7 +60,7 @@
     <script>
         function cleanHTML() {
     var inputText = document.getElementById('texto_da_textarea').value;
-    var allowedTags = ['h1', 'p', 'h2', 'h3', 'ul', 'li','b','strong'];
+    var allowedTags = ['h1', 'p', 'h2', 'h3', 'ul', 'li','b','strong','ol'];
 
     // Remove todas as tags exceto as permitidas
     var cleanedText = inputText.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, function(tag, tagName) {
