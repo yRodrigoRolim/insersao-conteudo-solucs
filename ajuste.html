@@ -66,7 +66,7 @@
     var cleanedText = inputText.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, function(tag, tagName) {
         return allowedTags.includes(tagName.toLowerCase()) ? tag : '';
     });
-
+    var cleanedText = cleanedText.replace(/<\/?\s*br\s*\/?>/gi, '');
     // Exibe o resultado
     document.getElementById('conteudoParaCopiar').textContent = cleanedText;
 }
