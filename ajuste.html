@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Esteiras</title>
+    <style>
+        :root{
+    --color-primary: #FF5319;
+    --color-secundary: #3D315B;
+    --color-green: #A2D729;
+    --color-red: #BB0A21;
+}
+    </style>
+</head>
+<body>
+    <aside>
+        <div>
+            <h1>Solucs</h1>
+            <p>Inserção de contéudo</p>
+            <div class="orange-line"></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="ajuste.html">Ajuste</a></li>
+                    <li><input type="color" id="colorPicker"></li>
+                </ul>
+            </nav>
+        </div>
+    </aside> 
+
+    <main>
+        <div style="width: 900px; max-width: none;">
+            <div>
+                <h1>Inserção de conteúdo</h1>
+                <p>Faça a sua Inserção de contéudo</p>
+                <div class="orange-line" style="max-width: 40%; margin: 10px 0px;"></div>
+                <h3>Inserção de conteúdo</h3>    
+            </div>
+            <div>
+                <form>
+                    <label for="texto_da_textarea">Cole o seu texto e identifique as listas com !list</label><br>
+                    <div class="orange-line" style="max-width: 60%; margin: 10px 0px;"></div>
+                    <input type="text" name="strong" id="strong" placeholder="Palavras para negrito, separadas por vírgula">
+                    <label for="strong">Coloque as palavras para deixar em negrito, separadas por vírgula!</label>
+                    <div style="display: flex; margin-top: 20px;">
+                        <textarea id="texto_da_textarea" name="texto_da_textarea" rows="12" required style="width: 100%; margin-right: 20px;"></textarea>
+                    </div>
+                    <div class="button-container">
+                        <button type="button" onclick="cleanHTML()">Criar o conteúdo</button>
+                        <button id="botaoCopiar">Clipboard</button>
+                    </div>
+                </form>
+            </div>
+            <div class="margin-top erros-retornos" id="conteudoParaCopiar"></div>
+        </div>
+    </main>
+
+    <script>
+        function cleanHTML() {
+    var inputText = document.getElementById('texto_da_textarea').value;
+    var allowedTags = ['h1', 'h2', 'h3', 'ul', 'li'];
+
+    // Remove todas as tags exceto as permitidas
+    var cleanedText = inputText.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, function(tag, tagName) {
+        return allowedTags.includes(tagName.toLowerCase()) ? tag : '';
+    });
+
+    // Exibe o resultado
+    document.getElementById('conteudoParaCopiar').innerHTML = cleanedText;
+}
+
+    </script>
+
+    <script>
+        document.getElementById('botaoCopiar').addEventListener('click', function() {
+            var conteudo = document.getElementById('conteudoParaCopiar').innerText;
+            var areaTexto = document.createElement('textarea');
+            areaTexto.value = conteudo;
+            document.body.appendChild(areaTexto);
+            areaTexto.select();
+            document.execCommand('Copy');
+            document.body.removeChild(areaTexto);
+ 
+        });
+    </script>
+
+    <script>
+        // Seleciona o input color
+// const colorPicker = document.getElementById('colorPicker');
+
+// // Adiciona um ouvinte de eventos para quando o valor do input muda
+// colorPicker.addEventListener('input', function() {
+//     // Atualiza a variável CSS --color-primary com o valor selecionado
+//     document.documentElement.style.setProperty('--color-primary', colorPicker.value);
+// });
+
+        
+const colorPicker = document.getElementById('colorPicker');
+
+// Função para atualizar a cor
+function updateColor(color) {
+    document.documentElement.style.setProperty('--color-primary', color);
+    localStorage.setItem('selectedColor', color); // Salva a cor no localStorage
+}
+
+// Adiciona um ouvinte de eventos para quando o valor do input muda
+colorPicker.addEventListener('input', function() {
+    updateColor(colorPicker.value);
+});
+
+// Verifica se já existe uma cor salva no localStorage ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    const savedColor = localStorage.getItem('selectedColor');
+    if (savedColor) {
+        colorPicker.value = savedColor; // Define o valor do input para a cor salva
+        updateColor(savedColor); // Atualiza a cor da página com a cor salva
+    }
+});
+
+    </script>
+</body>
+</html>
